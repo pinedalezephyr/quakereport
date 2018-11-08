@@ -24,6 +24,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -140,9 +141,13 @@ public class EarthquakeActivity extends AppCompatActivity
         // data set. This will trigger the ListView to update.
         if (earthquakes != null && !earthquakes.isEmpty()) {
             //mAdapter.addAll(earthquakes);
+
             updateUi(earthquakes);
         }
-
+        Log.e("AJW", "number of earthquakes" + earthquakes.size());
+        mAdapter = new EarthquakeAdapter (this, earthquakes);
+        updateUi(earthquakes);
+        
         }
 
 
