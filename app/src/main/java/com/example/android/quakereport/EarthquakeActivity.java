@@ -41,6 +41,8 @@ public class EarthquakeActivity extends AppCompatActivity
     private static final String USGS_REQUEST_URL =
             "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=6&limit=10";
 
+    private void updateUi(List<Earthquake> earthquakes) {
+    }
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
