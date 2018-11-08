@@ -43,6 +43,10 @@ public class EarthquakeActivity extends AppCompatActivity
             "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=6&limit=10";
 
     private void updateUi(List<Earthquake> earthquakes) {
+        
+        // Set the adapter on the {@link ListView}
+        // so the list can be populated in the user interface
+        earthquakeListView.setAdapter(mAdapter);
     }
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
@@ -55,6 +59,7 @@ public class EarthquakeActivity extends AppCompatActivity
 
     /** TextView that is displayed when the list is empty */
     private TextView mEmptyStateTextView;
+    private ListView earthquakeListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +67,7 @@ public class EarthquakeActivity extends AppCompatActivity
         setContentView(R.layout.earthquake_activity);
 
         // Find a reference to the {@link ListView} in the layout
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        earthquakeListView = (ListView) findViewById(R.id.list);
 
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         earthquakeListView.setEmptyView(mEmptyStateTextView);
@@ -136,19 +141,18 @@ public class EarthquakeActivity extends AppCompatActivity
         mEmptyStateTextView.setText(R.string.no_earthquakes);
 
         // Clear the adapter of previous earthquake data
-        //mAdapter.clear();
+            mAdapter.clear();
 // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (earthquakes != null && !earthquakes.isEmpty()) {
             //mAdapter.addAll(earthquakes);
-
+            Log.e("AJW", "number of earthquakes" + earthquakes.size());
+            mAdapter = new EarthquakeAdapter (this, earthquakes);
             updateUi(earthquakes);
+
         }
-        Log.e("AJW", "number of earthquakes" + earthquakes.size());
-        mAdapter = new EarthquakeAdapter (this, earthquakes);
-        updateUi(earthquakes);
-        
-        }
+
+       }
 
 
     @Override
